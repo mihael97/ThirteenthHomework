@@ -2,6 +2,8 @@ package hr.fer.zemris.java.servlets;
 
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.util.Enumeration;
+import java.util.function.Consumer;
 
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
@@ -43,8 +45,8 @@ public class ServletImage extends HttpServlet {
 		// specification setting
 		resp.setContentType("png; charset=utf-8");
 
-		PieDataset dataset = createDataset();
-		JFreeChart chart = createChart(dataset, "Best programming languages");
+		PieDataset dataset = createDataset(req);
+		JFreeChart chart = createChart(dataset, "");
 
 		ByteArrayOutputStream bos = new ByteArrayOutputStream();
 		try {
@@ -59,13 +61,25 @@ public class ServletImage extends HttpServlet {
 	/**
 	 * Method creates data set
 	 * 
+	 * @param req
+	 * 
 	 * @return dataset
 	 */
-	private PieDataset createDataset() {
+	private PieDataset createDataset(HttpServletRequest req) {
 		DefaultPieDataset result = new DefaultPieDataset();
-		result.setValue("Python", 0.25);
-		result.setValue("Java", 99.5);
-		result.setValue("C#", 0.25);
+
+		Enumeration<String> enumAttribute = req.getParameterNames();
+
+		if (enumAttribute.hasMoreElements()) {
+			enumAttribute.asIterator().forEachRemaining(new Consumer<String>() {
+
+				@Override
+				public void accept(String arg0) {
+					result.setValue(arg0, Integer.parseInt(req.getParameter(arg0)));
+				}
+			});
+		}
+
 		return result;
 	}
 

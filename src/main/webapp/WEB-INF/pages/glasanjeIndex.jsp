@@ -19,16 +19,17 @@
 	}
 %>
 
+<!DOCTYPE>
 <html>
-<body bgcolor="<%=color%>">
-	<table>
-		<tr>
-			<th>X</th>
-			<th>sin(X)</th>
-			<th>cos(X)</th>
-		</tr>
-
-
-	</table>
+<body>
+	<h1>Glasanje za omiljeni bend:</h1>
+	<p>Od sljedećih bendova, koji Vam je bend najdraži? Kliknite na
+		link kako biste glasali!</p>
+	<ol>
+		<c:forEach var="band" items="${bands}">
+			<li><a
+				href="<%=request.getContextPath()%>\glasanje-glasaj?id=${band.getId()}">${band.getName()}</a></li>
+		</c:forEach>
+	</ol>
 </body>
 </html>

@@ -34,11 +34,12 @@
 			value="Reset">
 	</form>
 
-	<a href="<%request.getContextPath();%>\trigonometric?a=0:b=90">
+	<a href="<%=request.getContextPath()%>\trigonometric?a=0&b=90">
 		Shows result of trigonometric operation </a>
-	<a href="stories/funny.jsp">Funny story</a>
-	<a href="<%request.getContextPath();%>\powers?a=1:b=100:n=3">Funny
-		story</a>
+	<a href="<%=request.getContextPath()%>\stories\funny.jsp">Funny story</a>
+	<a href="<%=request.getContextPath()%>\powers?a=1&b=100:n=3">Excel</a>
+	<a href="<%=request.getContextPath()%>\appinfo.jsp">Server
+		statistic</a>
 
 </body>
 </html>
