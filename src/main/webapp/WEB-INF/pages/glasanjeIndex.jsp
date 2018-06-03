@@ -6,7 +6,7 @@
 
 <%
 	String color = "#FFFFFF"; //white
-	String stored = String.valueOf(request.getSession().getAttribute("pickedBgCol"));
+	String stored = String.valueOf(session.getAttribute("pickedBgCol"));
 
 	if (stored != null) {
 		if (stored.equals("red")) {
@@ -21,9 +21,10 @@
 
 <!DOCTYPE>
 <html>
-<body>
-	<h1>Voting for favourite band</h1>
-	<p>From given bands,which one is your best? Click on link for vote!</p>
+<body bgcolor=<%=color%>>
+	<h1>Voting for favorite band</h1>
+	<p>From given bands,which one is your favorite? Click on link for
+		vote!</p>
 	<ol>
 		<c:forEach var="band" items="${bands}">
 			<li><a

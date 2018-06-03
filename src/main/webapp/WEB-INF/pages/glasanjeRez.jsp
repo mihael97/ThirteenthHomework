@@ -6,7 +6,7 @@
 
 <%
 	String color = "#FFFFFF"; //white
-	String stored = String.valueOf(request.getSession().getAttribute("pickedBgCol"));
+	String stored = String.valueOf(session.getAttribute("pickedBgCol"));
 
 	if (stored != null) {
 		if (stored.equals("red")) {
@@ -29,7 +29,7 @@ table.rez td {
 }
 </style>
 </head>
-<body>
+<body bgcolor=<%=color%>>
 	<h1>Voting results</h1>
 	<p>This are voting results</p>
 	<table border="1" cellspacing="0" class="rez">
@@ -50,8 +50,7 @@ table.rez td {
 	</table>
 	<h2>Graphical show</h2>
 	<img alt="Pie-chart"
-		src="<%=request.getContextPath()%>
-		/glasanje-grafika" width="400"
+		src="<%=request.getContextPath()%>/glasanje-grafika" width="400"
 		height="400" />
 	<h2>Result in XLS format</h2>
 	<p>

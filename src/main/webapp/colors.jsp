@@ -2,7 +2,7 @@
 <%@ page session="true"%>
 <%
 	String color = "#FFFFFF"; //white
-	String stored = String.valueOf(request.getSession().getAttribute("pickedBgCol"));
+	String stored = String.valueOf(session.getAttribute("pickedBgCol"));
 
 	if (stored != null) {
 		if (stored.equals("red")) {
@@ -11,11 +11,11 @@
 			color = "#00FFFF";
 		} else if (stored.equals("green")) {
 			color = "#00FF00";
-		} 
+		}
 	}
 %>
 <html>
-<body <%=color%>>
+<body bgcolor=<%=color%>>
 	<p>
 		Color is
 		<%=color%></p>
@@ -24,6 +24,9 @@
 	<a href="<%=request.getContextPath()%>\setcolor?pickedBgCol=cyan">CYAN</a>
 	<a href="<%=request.getContextPath()%>\setcolor?pickedBgCol=green">GREEN</a>
 
-	<a href="<%=request.getContextPath()%>\index.jsp">Back to homepage!</a>
+	<p>
+		<a href="<%=request.getContextPath()%>\index.jsp">Back to
+			homepage</a>
+	</p>
 </body>
 </html>

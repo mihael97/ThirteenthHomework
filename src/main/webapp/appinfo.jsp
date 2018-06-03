@@ -1,10 +1,11 @@
-<%@page import="org.jfree.data.time.Millisecond"%>
-<%@ page contentType="text/html; charset=UTF-8
-	" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@  page session="true"%>
+
+
 <%
 	String color = "#FFFFFF"; //white
-	String stored = String.valueOf(request.getSession().getAttribute("pickedBgCol"));
+	String stored = String.valueOf(session.getAttribute("pickedBgCol"));
 
 	if (stored != null) {
 		if (stored.equals("red")) {
@@ -17,24 +18,24 @@
 	}
 %>
 
-<%!/**
-						*Method calculates how much time passed between server starting and current timr
-						*@param time - server starting time in miliseconds
-						*
-						* @return String with calculated time in fommat " xy days xy hours xy minutes xy seconds xy miliseconds"
-						*/
-	private String getTimeDifference(long beginning) {
-		long millis = System.currentTimeMillis() - beginning;
-		long seconds = millis / 1000;
-		long minutes = seconds / 60;
-		long hours = minutes / 60;
+<%!private String getTime(long time) {
+		long milis = System.currentTimeMillis() - time;
+		long sec = milis / 1000;
+		long min = sec / 60;
+		long hours = milis / 60;
 		long days = hours / 24;
-		return String.format("%02d days %02d hours %02d minutes %02d seconds", days, hours % 24, minutes % 60,
-				seconds % 60);
+
+		return String.format("%02d days %02 hours %02 minutes %02 seconds %02 miliseconda", days, hours % 24, min % 60,
+				sec % 60, milis % 1000);
 	}%>
-<p>
-	Server is active for
-	<%=getTimeDifference((long) session.getServletContext().getAttribute("time"))%>
-</p>
+
+<!DOCTYPE>
+
+<html>
+<body bgcolor=<%=color%>>
+	<p>
+		Server is active for
+		<%=getTime((long) session.getServletContext().getAttribute("time"))%>
+	</p>
 </body>
 </html>

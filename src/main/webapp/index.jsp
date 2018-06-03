@@ -5,7 +5,7 @@
 
 <%
 	String color = "#FFFFFF"; //white
-	String stored = String.valueOf(request.getSession().getAttribute("pickedBgCol"));
+	String stored = String.valueOf(session.getAttribute("pickedBgCol"));
 
 	if (stored != null) {
 		if (stored.equals("red")) {
@@ -21,7 +21,7 @@
 <!DOCTYPE>
 
 <html>
-<body>
+<body bgcolor=<%=color%>>
 	<a href="<%=request.getContextPath()%>\colors.jsp"> Background
 		color chooser</a>
 
@@ -47,6 +47,10 @@
 	<p>
 		<a href="<%=request.getContextPath()%>\appinfo.jsp">Server
 			statistic</a>
+	</p>
+
+	<p>
+		<a href="<%=request.getContextPath()%>\glasanje">Voting</a>
 	</p>
 
 </body>

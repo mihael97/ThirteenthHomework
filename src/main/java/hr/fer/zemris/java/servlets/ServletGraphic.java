@@ -14,13 +14,12 @@ public class ServletGraphic extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		StringBuilder builder = new StringBuilder();
-		List<BandStructure> list = (List<BandStructure>) req.getAttribute("sorted");
+		List<BandStructure> list = (List<BandStructure>) req.getSession().getAttribute("allItems");
 
-		for (BandStructure structure : list) {
-			builder.append("&").append(structure.getId()).append("=").append(structure.getVote());
+		for (BandStructure struc : list) {
+			builder.append("&").append(struc.getName()).append("=").append(struc.getVote());
 		}
 
-		builder = new StringBuilder(builder.substring(1));
-		resp.sendRedirect(req.getContextPath() + "/reportImage?" + builder.toString());
+		resp.sendRedirect(req.getContextPath() + "/reportImage?" + builder.toString().substring(1));
 	}
 }

@@ -28,7 +28,7 @@ public class ServletColor extends HttpServlet {
 		resp.setContentType("text/html; charset=utf-8");
 		resp.setStatus(HttpServletResponse.SC_ACCEPTED);
 
-		req.getSession().setAttribute("pickedBgColor", req.getParameter("pickedBgCol"));
+		req.getSession().setAttribute("pickedBgCol", req.getParameter("pickedBgCol"));
 		req.getRequestDispatcher("/colors.jsp").forward(req, resp);
 	}
 }
