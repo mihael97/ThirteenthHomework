@@ -21,13 +21,20 @@
 
 <html>
 <body bgcolor="<%=color%>">
-	<table>
+	<table border=2>
 		<tr>
 			<th>X</th>
 			<th>sin(X)</th>
 			<th>cos(X)</th>
 		</tr>
 
+		<c:forEach var="trigRes" items="${trigonometricResult}">
+			<tr>
+				<td align="center">${trigRes.getValue()}</td>
+				<td align="center">${trigRes.getSine()}</td>
+				<td align="center">${trigRes.getCosine()}</td>
+			</tr>
+		</c:forEach>
 
 	</table>
 </body>

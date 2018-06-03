@@ -7,15 +7,9 @@ public class BandStructure {
 	private Integer vote;
 
 	public BandStructure(String id, String name, String link) {
-		this(id, name, link, 0);
-	}
-
-	public BandStructure(String id, String name, String link, Integer vote) {
-		super();
 		this.id = id;
 		this.name = name;
 		this.link = link;
-		this.vote = vote;
 	}
 
 	public String getId() {
@@ -33,4 +27,9 @@ public class BandStructure {
 	public Integer getVote() {
 		return vote;
 	}
+
+	public void setVote(Integer vote) {
+		this.vote = vote;
+	}
+
 }

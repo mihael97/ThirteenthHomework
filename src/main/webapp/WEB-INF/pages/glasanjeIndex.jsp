@@ -22,9 +22,8 @@
 <!DOCTYPE>
 <html>
 <body>
-	<h1>Glasanje za omiljeni bend:</h1>
-	<p>Od sljedećih bendova, koji Vam je bend najdraži? Kliknite na
-		link kako biste glasali!</p>
+	<h1>Voting for favourite band</h1>
+	<p>From given bands,which one is your best? Click on link for vote!</p>
 	<ol>
 		<c:forEach var="band" items="${bands}">
 			<li><a

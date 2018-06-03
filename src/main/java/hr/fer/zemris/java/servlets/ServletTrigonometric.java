@@ -56,8 +56,8 @@ public class ServletTrigonometric extends HttpServlet {
 
 		if (a > b) {
 			swap(a, b);
-		} else if (b > (a + 270)) {
-			b = Integer.valueOf(a.intValue() + 270);
+		} else if (b > (a + 720)) {
+			b = Integer.valueOf(a.intValue() + 720);
 		}
 
 		// we need to create structure which will contain sine and cosine of number

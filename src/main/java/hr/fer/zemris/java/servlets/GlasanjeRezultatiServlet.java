@@ -5,14 +5,8 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
-import java.util.Collection;
-import java.util.Collections;
-import java.util.Comparator;
-import java.util.LinkedHashMap;
 import java.util.List;
-import java.util.Map;
-import java.util.Set;
-import java.util.TreeMap;
+import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -24,50 +18,44 @@ import hr.fer.zemris.java.strcutures.BandStructure;
 public class GlasanjeRezultatiServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Path path = Paths.get(req.getServletContext().getRealPath("/WEB-INF/glasanjerezultati.txt"));
+		Path path = Paths.get(req.getServletContext().getRealPath("/WEB-INF/glasanje-rezultati.txt"));
 
-		Map<String, Integer> map = new LinkedHashMap<>();
+		ArrayList<BandStructure> list = new ArrayList<>();
+		List<BandStructure> bands = (List<BandStructure>) req.getSession().getAttribute("bands");
 
 		if (Files.exists(path)) {
 			for (String string : Files.readAllLines(path)) {
 				String[] array = string.split("\t");
-				map.put(array[0], Integer.parseInt(array[1]));
+				int id = Integer.parseInt(array[0]);
+				bands.get(id - 1).setVote(Integer.parseInt(array[1]));
+				list.add(bands.get(id - 1));
 			}
 		} else {
-			for (BandStructure band : (List<BandStructure>) req.getSession().getAttribute("bands")) {
-				map.put(band.getId(), 0);
+			Files.createFile(path);
+			for (BandStructure band : bands) {
+				band.setVote(0);
+				list.add(band);
 			}
 		}
 
-		List<BandStructure> sorted = new ArrayList<>();
 		List<BandStructure> best = new ArrayList<>();
 
-		getResults(sorted, best, map);
+		getResults(best, list, req);
 
-		req.getSession().setAttribute("sorted", sorted);
-		req.getSession().setAttribute("best", best);
+		req.getSession().setAttribute("allItems", list);
 
 		req.getRequestDispatcher("/WEB-INF/pages/glasanjeRez.jsp").forward(req, resp);
 	}
 
-	private void getResults(List<BandStructure> sorted, List<BandStructure> best, Map<String, Integer> map) {
+	private void getResults(List<BandStructure> best, List<BandStructure> list, HttpServletRequest req) {
+		int max = 0;
 
-		Collection<Integer> values = map.values();
-		Collections.sort(new ArrayList<>(values));
-		Collections.reverse(new ArrayList<>(values));
-
-		boolean bestFlag = true;
-
-		for (Integer value : values) {
-			for (Map.Entry<String, Integer> mapEntry : map.entrySet()) {
-				BandStructure struc = new BandStructure(mapEntry.getKey(), null, null, value);
-				sorted.add(struc);
-				if (bestFlag) {
-					best.add(struc);
-				}
-			}
-
-			bestFlag = false;
+		for (BandStructure band : list) {
+			max = Math.max(max, band.getVote());
 		}
+
+		final int max2 = max;
+		best = list.stream().filter(e -> e.getVote() == max2).collect(Collectors.toList());
+		req.getSession().setAttribute("best", best);
 	}
 }

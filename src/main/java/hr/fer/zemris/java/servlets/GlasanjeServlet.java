@@ -16,7 +16,7 @@ import hr.fer.zemris.java.strcutures.BandStructure;
 public class GlasanjeServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String fileName = req.getServletContext().getRealPath("/WEB-INF/glasanjedefinicija.txt");
+		String fileName = req.getServletContext().getRealPath("/WEB-INF/glasanje-definicija.txt");
 		resp.setStatus(HttpServletResponse.SC_ACCEPTED);
 		resp.setContentType("html/text; charset=utf-8");
 
@@ -25,9 +25,10 @@ public class GlasanjeServlet extends HttpServlet {
 		for (String line : bandList) {
 			String[] array = line.split("\t");
 
-			list.add(new BandStructure(array[0], array[1], array[2]));
+			list.add(new BandStructure(array[0].trim(), array[1].trim(), array[2].trim()));
 		}
 
+		list.forEach(e -> e.getName());
 		req.getSession().setAttribute("bands", list);
 		req.getRequestDispatcher("/WEB-INF/pages/glasanjeIndex.jsp").forward(req, resp);
 	}

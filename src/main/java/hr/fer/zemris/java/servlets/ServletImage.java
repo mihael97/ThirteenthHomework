@@ -71,13 +71,18 @@ public class ServletImage extends HttpServlet {
 		Enumeration<String> enumAttribute = req.getParameterNames();
 
 		if (enumAttribute.hasMoreElements()) {
-			enumAttribute.asIterator().forEachRemaining(new Consumer<String>() {
+			// enumAttribute.asIterator().forEachRemaining(new Consumer<String>() {
+			//
+			// @Override
+			// public void accept(String arg0) {
+			// result.setValue(arg0, Integer.parseInt(req.getParameter(arg0)));
+			// }
+			// });
 
-				@Override
-				public void accept(String arg0) {
-					result.setValue(arg0, Integer.parseInt(req.getParameter(arg0)));
-				}
-			});
+			while (enumAttribute.hasMoreElements()) {
+				String strig = enumAttribute.nextElement();
+				result.setValue(strig, Integer.parseInt(req.getParameter(strig)));
+			}
 		}
 
 		return result;

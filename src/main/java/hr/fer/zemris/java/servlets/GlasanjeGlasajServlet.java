@@ -18,20 +18,20 @@ import hr.fer.zemris.java.strcutures.BandStructure;
 public class GlasanjeGlasajServlet extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		Path path = Paths.get(req.getServletContext().getRealPath("/WEB-INF/glasanjerezultati.txt"));
-		Integer idVote = Integer.parseInt((String) req.getAttribute("id"));
+		Path path = Paths.get(req.getServletContext().getRealPath("/WEB-INF/glasanje-rezultati.txt"));
+		Integer idVote = Integer.parseInt((String) req.getParameter("id"));
 
 		Map<String, Integer> map = new LinkedHashMap<>();
 
 		if (Files.exists(path)) { // file already exists
 			for (String line : Files.readAllLines(path)) {
 				String[] array = line.split("\t");
-				Integer value = Integer.parseInt(array[0]);
-				map.put(array[0], (idVote == value ? value + 1 : value));
+				Integer value = Integer.parseInt(array[1]);
+				map.put(array[0], (idVote == Integer.parseInt(array[0]) ? value + 1 : value));
 			}
 		} else { // file doesn't exist
 			for (BandStructure band : (List<BandStructure>) req.getSession().getAttribute("bands")) {
-				map.put(band.getId(), (idVote == Integer.parseInt(band.getId())) ? 1 : 0);
+				map.put(band.getId(), (idVote == Integer.parseInt(band.getId().trim())) ? 1 : 0);
 			}
 		}
 

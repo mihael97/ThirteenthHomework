@@ -1,5 +1,4 @@
-<%@ page contentType="text/html; charset=UTF-8
-	" pageEncoding="UTF-8"%>
+<%@ page contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c"%>
 <%@  page session="true"%>
 
@@ -23,8 +22,8 @@
 
 <html>
 <body>
-	<a href="<%=request.getContextPath()%>WEB-INF/pages/colors.jsp">
-		Background color chooser</a>
+	<a href="<%=request.getContextPath()%>\colors.jsp"> Background
+		color chooser</a>
 
 	<form action="trigonometric" method="GET">
 		Početni kut:<br> <input type="number" name="a" min="0" max="360"
@@ -34,12 +33,21 @@
 			value="Reset">
 	</form>
 
-	<a href="<%=request.getContextPath()%>\trigonometric?a=0&b=90">
-		Shows result of trigonometric operation </a>
-	<a href="<%=request.getContextPath()%>\stories\funny.jsp">Funny story</a>
-	<a href="<%=request.getContextPath()%>\powers?a=1&b=100:n=3">Excel</a>
-	<a href="<%=request.getContextPath()%>\appinfo.jsp">Server
-		statistic</a>
+	<p>
+		<a href="<%=request.getContextPath()%>\trigonometric?a=0&b=90">
+			Shows result of trigonometric operation </a>
+	</p>
+	<p>
+		<a href="<%=request.getContextPath()%>\stories\funny.jsp">Funny
+			story</a>
+	</p>
+	<p>
+		<a href="<%=request.getContextPath()%>\powers?a=1&b=100&n=3">Excel</a>
+	</p>
+	<p>
+		<a href="<%=request.getContextPath()%>\appinfo.jsp">Server
+			statistic</a>
+	</p>
 
 </body>
 </html>

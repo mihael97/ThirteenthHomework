@@ -40,7 +40,7 @@ table.rez td {
 			</tr>
 		</thead>
 		<tbody>
-			<c:forEach var="structure" items="${sorted}">
+			<c:forEach var="structure" items="${allItems}">
 				<tr>
 					<td>${sessionScope.get("bands").get(structure.getId()-1).getName()}</td>
 					<td>${structure.getVote()}</td>
@@ -55,15 +55,15 @@ table.rez td {
 		height="400" />
 	<h2>Result in XLS format</h2>
 	<p>
-		Results in XLS format are available <a href="/glasanje-xls">here</a>
+		Results in XLS format are available <a
+			href="<%=request.getContextPath()%>/glasanje-xls">here</a>
 	</p>
 	<h2>Other</h2>
 	<p>Some songs from winner/winners</p>
 	<ul>
-		<li><a href="https://www.youtube.com/watch?v=z9ypq6_5bsg"
-			target="_blank">The Beatles</a></li>
-		<li><a href="https://www.youtube.com/watch?v=H2di83WAOhU"
-			target="_blank">The Platters</a></li>
+		<c:forEach var="structure" items="${best}">
+			<li><a href="${structure.getLink()}" target="_blank">${structure.getName()}</a></li>
+		</c:forEach>
 	</ul>
 </body>
 </html>

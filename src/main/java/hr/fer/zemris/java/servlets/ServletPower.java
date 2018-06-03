@@ -24,7 +24,7 @@ import static java.lang.Math.pow;
  * @author Mihael
  *
  */
-public class ServletPowers extends HttpServlet {
+public class ServletPower extends HttpServlet {
 	/**
 	 * serialVersionUID
 	 */
@@ -41,11 +41,12 @@ public class ServletPowers extends HttpServlet {
 	 */
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
+		resp.setContentType("application/vnd.ms-excel; charset=utf-8");
+		resp.setStatus(HttpServletResponse.SC_OK);
 		int a = 0;
 		HSSFWorkbook workbook = null;
 		try {
-			a = Integer.parseInt("a");
+			a = Integer.parseInt(req.getParameter("a"));
 
 			if (a < -100 || a > 100) {
 				sendError(req, resp);
@@ -59,7 +60,7 @@ public class ServletPowers extends HttpServlet {
 		int b = 0;
 
 		try {
-			b = Integer.parseInt("b");
+			b = Integer.parseInt(req.getParameter("b"));
 
 			if (b < -100 || b > 100) {
 				sendError(req, resp);
@@ -73,7 +74,7 @@ public class ServletPowers extends HttpServlet {
 		int n = 0;
 
 		try {
-			n = Integer.parseInt("n");
+			n = Integer.parseInt(req.getParameter("n"));
 
 			if (!(n >= 1 && n <= 5)) {
 				sendError(req, resp);
@@ -136,7 +137,7 @@ public class ServletPowers extends HttpServlet {
 	 */
 	private void sendError(HttpServletRequest req, HttpServletResponse resp) {
 		try {
-			req.getRequestDispatcher("/WEB-INF/pages/powersError.jsp").forward(req, resp);
+			req.getRequestDispatcher("/WEB-INF/pages/powerError.jsp").forward(req, resp);
 		} catch (ServletException e) {
 			e.printStackTrace();
 		} catch (IOException e) {
