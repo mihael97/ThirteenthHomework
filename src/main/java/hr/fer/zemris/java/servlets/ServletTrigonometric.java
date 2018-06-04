@@ -73,7 +73,7 @@ public class ServletTrigonometric extends HttpServlet {
 	}
 
 	/**
-	 * Method swaps values from two objects
+	 * Method swaps values  between two objects
 	 * 
 	 * @param a
 	 *            - first value

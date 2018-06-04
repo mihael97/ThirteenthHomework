@@ -4,6 +4,7 @@
 
 <html>
 <body>
+	<h2>Funny story</h2>
 	<%
 		String fontColor = null;
 		char array[] = "0123456789ABCDEF".toCharArray();

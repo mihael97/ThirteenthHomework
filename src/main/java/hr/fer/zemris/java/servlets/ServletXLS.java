@@ -14,7 +14,27 @@ import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import hr.fer.zemris.java.strcutures.BandStructure;
 
+/**
+ * Class represents XLS document generator
+ * 
+ * @author Mihael
+ *
+ */
 public class ServletXLS extends HttpServlet {
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Method catches all bands with informations from memory and generates document
+	 * with it
+	 * 
+	 * @param req
+	 *            - request
+	 * @param resp
+	 *            - response
+	 */
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("application/vnd.ms-excel; charsets=utf-8");
@@ -27,6 +47,13 @@ public class ServletXLS extends HttpServlet {
 		resp.getOutputStream().close();
 	}
 
+	/**
+	 * Method generates document with voting informations
+	 * 
+	 * @param stored
+	 *            - list of stored bands with votes
+	 * @return {@link HSSFWorkbook}
+	 */
 	private HSSFWorkbook generateDocument(List<BandStructure> stored) {
 		HSSFWorkbook file = new HSSFWorkbook();
 		HSSFSheet sheet = file.createSheet("Voting results");

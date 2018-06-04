@@ -15,8 +15,8 @@ import static java.lang.Math.pow;
 /**
  * Class represents servelt for Excel document generator<br>
  * For document generating,process must have <code>3</code> parameters where
- * <code>a</code> and <code>b</code> our number interval limits and
- * <code>n</code> is number of pages we want to generate<br>
+ * <code>a</code> and <code>b</code> are number interval limits and
+ * <code>n</code> which is number of pages we want to generate<br>
  * Every page in first column contains all number from <code>a</code> to
  * <code>b</code> and in second column power of every number on <code>i</code>
  * where <code>i</code> is number of current page
@@ -31,7 +31,7 @@ public class ServletPower extends HttpServlet {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * Method parses number and if they are valid,calls method for document
+	 * Method parses numbers and if they are valid,calls method for document
 	 * generating
 	 * 
 	 * @param req

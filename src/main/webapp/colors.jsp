@@ -16,17 +16,22 @@
 %>
 <html>
 <body bgcolor=<%=color%>>
+	<h2>Please choose in which color you want to paint page:</h2>
 	<p>
-		Color is
-		<%=color%></p>
-	<a href="<%=request.getContextPath()%>\setcolor?pickedBgCol=white">WHITE</a>
-	<a href="<%=request.getContextPath()%>\setcolor?pickedBgCol=red">RED</a>
-	<a href="<%=request.getContextPath()%>\setcolor?pickedBgCol=cyan">CYAN</a>
-	<a href="<%=request.getContextPath()%>\setcolor?pickedBgCol=green">GREEN</a>
+		<a href="<%=request.getContextPath()%>\setcolor?pickedBgCol=white">WHITE</a>
+	</p>
+	<p>
+		<a href="<%=request.getContextPath()%>\setcolor?pickedBgCol=red">RED</a>
+	</p>
+	<p>
+		<a href="<%=request.getContextPath()%>\setcolor?pickedBgCol=cyan">CYAN</a>
+	</p>
+	<p>
+		]<a href="<%=request.getContextPath()%>\setcolor?pickedBgCol=green">GREEN</a>
+	</p>
 
 	<p>
-		<a href="<%=request.getContextPath()%>\index.jsp">Back to
-			homepage</a>
+		<a href="<%=request.getContextPath()%>\index.jsp">Back to homepage</a>
 	</p>
 </body>
 </html>

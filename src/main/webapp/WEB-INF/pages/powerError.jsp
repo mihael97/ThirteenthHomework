@@ -21,6 +21,7 @@
 
 <html>
 <body bgColor="<%=color%>">
+	<h2>ERROR!</h2>
 	<p>ERROR HAS HAPPENED DURING EXCEL DOCUMENT CREATING</p>
 </body>
 </html>

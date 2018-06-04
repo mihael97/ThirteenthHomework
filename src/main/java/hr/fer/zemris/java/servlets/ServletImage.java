@@ -3,8 +3,6 @@ package hr.fer.zemris.java.servlets;
 import java.io.ByteArrayOutputStream;
 import java.io.IOException;
 import java.util.Enumeration;
-import java.util.function.Consumer;
-
 import javax.imageio.ImageIO;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;

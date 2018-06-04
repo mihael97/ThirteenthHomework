@@ -10,7 +10,17 @@ import javax.servlet.http.HttpServletResponse;
 
 import hr.fer.zemris.java.strcutures.BandStructure;
 
+
 public class ServletGraphic extends HttpServlet {
+	/**
+	 * Method puts all names with votes in valid form and then redirect
+	 * informations to graph generator
+	 * 
+	 * @param req
+	 *            - request
+	 * @param resp
+	 *            - response
+	 */
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		StringBuilder builder = new StringBuilder();

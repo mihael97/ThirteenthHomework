@@ -15,7 +15,26 @@ import javax.servlet.http.HttpServletResponse;
 
 import hr.fer.zemris.java.strcutures.BandStructure;
 
+/**
+ * Class represents voting analyzer
+ * 
+ * @author Mihael
+ *
+ */
 public class GlasanjeRezultatiServlet extends HttpServlet {
+	/**
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Method loads document from disc and analyzes results
+	 * 
+	 * @param req
+	 *            - request
+	 * @param resp
+	 *            - response
+	 */
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		Path path = Paths.get(req.getServletContext().getRealPath("/WEB-INF/glasanje-rezultati.txt"));
@@ -47,6 +66,16 @@ public class GlasanjeRezultatiServlet extends HttpServlet {
 		req.getRequestDispatcher("/WEB-INF/pages/glasanjeRez.jsp").forward(req, resp);
 	}
 
+	/**
+	 * Method analyzes current voting results
+	 * 
+	 * @param best
+	 *            - list of best bands(with higher number of votes)
+	 * @param list
+	 *            - list of all bands with results
+	 * @param req
+	 *            - request
+	 */
 	private void getResults(List<BandStructure> best, List<BandStructure> list, HttpServletRequest req) {
 		int max = 0;
 

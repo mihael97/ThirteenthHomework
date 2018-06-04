@@ -13,7 +13,26 @@ import javax.servlet.http.HttpServletResponse;
 
 import hr.fer.zemris.java.strcutures.BandStructure;
 
+/**
+ * Method represents data loader for voting form
+ * 
+ * @author MIhael
+ *
+ */
 public class GlasanjeServlet extends HttpServlet {
+	/**
+	 * serialVersonUID
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Method loads bends informations form disc
+	 * 
+	 * @param req
+	 *            - request
+	 * @param resp
+	 *            - response
+	 */
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		String fileName = req.getServletContext().getRealPath("/WEB-INF/glasanje-definicija.txt");

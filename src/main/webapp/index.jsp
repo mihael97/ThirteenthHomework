@@ -22,6 +22,7 @@
 
 <html>
 <body bgcolor=<%=color%>>
+	<h2>Main page</h2>
 	<a href="<%=request.getContextPath()%>\colors.jsp"> Background
 		color chooser</a>
 

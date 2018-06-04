@@ -21,6 +21,7 @@
 
 <html>
 <body bgcolor="<%=color%>">
+	<h2>Trigonometric results</h2>
 	<table border=2>
 		<tr>
 			<th>X</th>
