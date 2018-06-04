@@ -2,6 +2,7 @@ package hr.fer.zemris.java.servlets;
 
 import java.io.IOException;
 import java.util.List;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +14,7 @@ import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 
 import hr.fer.zemris.java.strcutures.BandStructure;
+import hr.fer.zemris.java.util.Util;
 
 /**
  * Class represents XLS document generator
@@ -38,9 +40,10 @@ public class ServletXLS extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("application/vnd.ms-excel; charsets=utf-8");
+		resp.setHeader("Content-Disposition", "attachment; filename=\"tablica.xls\"");
 		resp.setStatus(HttpServletResponse.SC_OK);
 
-		HSSFWorkbook file = generateDocument((List<BandStructure>) req.getSession().getAttribute("allItems"));
+		HSSFWorkbook file = generateDocument(Util.getResults(req), Util.loadBends(req));
 
 		file.write(resp.getOutputStream());
 		resp.getOutputStream().flush();
@@ -50,17 +53,20 @@ public class ServletXLS extends HttpServlet {
 	/**
 	 * Method generates document with voting informations
 	 * 
-	 * @param stored
+	 * @param map
 	 *            - list of stored bands with votes
+	 * @param list
 	 * @return {@link HSSFWorkbook}
 	 */
-	private HSSFWorkbook generateDocument(List<BandStructure> stored) {
+	private HSSFWorkbook generateDocument(Map<Integer, Integer> map, List<BandStructure> list) {
 		HSSFWorkbook file = new HSSFWorkbook();
 		HSSFSheet sheet = file.createSheet("Voting results");
-		for (int i = 0, length = stored.size(); i < length; i++) {
+		int i = 0;
+		for (Map.Entry<Integer, Integer> pomMap : map.entrySet()) {
 			HSSFRow row = sheet.createRow(i);
-			row.createCell(0).setCellValue(stored.get(i).getName());
-			row.createCell(1).setCellValue(stored.get(i).getVote());
+			row.createCell(0).setCellValue(list.get(pomMap.getKey() - 1).getName());
+			row.createCell(1).setCellValue(pomMap.getValue());
+			i++;
 		}
 
 		return file;

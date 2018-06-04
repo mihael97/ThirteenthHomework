@@ -42,7 +42,7 @@ table.rez td {
 		<tbody>
 			<c:forEach var="structure" items="${allItems}">
 				<tr>
-					<td>${sessionScope.get("bands").get(structure.getId()-1).getName()}</td>
+					<td>${structure.getName()}</td>
 					<td>${structure.getVote()}</td>
 				</tr>
 			</c:forEach>

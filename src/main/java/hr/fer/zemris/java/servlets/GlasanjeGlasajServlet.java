@@ -5,7 +5,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.LinkedHashMap;
-import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -14,6 +13,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import hr.fer.zemris.java.strcutures.BandStructure;
+import hr.fer.zemris.java.util.Util;
 
 /**
  * Class represents servlet which analyzes our vote
@@ -41,17 +41,14 @@ public class GlasanjeGlasajServlet extends HttpServlet {
 		Path path = Paths.get(req.getServletContext().getRealPath("/WEB-INF/glasanje-rezultati.txt"));
 		Integer idVote = Integer.parseInt((String) req.getParameter("id"));
 
-		Map<String, Integer> map = new LinkedHashMap<>();
+		Map<Integer, Integer> map = new LinkedHashMap<>();
 
 		if (Files.exists(path)) { // file already exists
-			for (String line : Files.readAllLines(path)) {
-				String[] array = line.split("\t");
-				Integer value = Integer.parseInt(array[1]);
-				map.put(array[0], (idVote == Integer.parseInt(array[0]) ? value + 1 : value));
-			}
+			map = Util.getResults(req);
+			map.merge(idVote, 1, (i, j) -> i + j);
 		} else { // file doesn't exist
-			for (BandStructure band : (List<BandStructure>) req.getSession().getAttribute("bands")) {
-				map.put(band.getId(), (idVote == Integer.parseInt(band.getId().trim())) ? 1 : 0);
+			for (BandStructure band : Util.loadBends(req)) {
+				map.put(Integer.parseInt(band.getId()), (idVote == Integer.parseInt(band.getId().trim())) ? 1 : 0);
 			}
 		}
 

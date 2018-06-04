@@ -6,6 +6,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 import java.util.stream.Collectors;
 
 import javax.servlet.ServletException;
@@ -14,6 +15,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import hr.fer.zemris.java.strcutures.BandStructure;
+import hr.fer.zemris.java.util.Util;
 
 /**
  * Class represents voting analyzer
@@ -40,14 +42,12 @@ public class GlasanjeRezultatiServlet extends HttpServlet {
 		Path path = Paths.get(req.getServletContext().getRealPath("/WEB-INF/glasanje-rezultati.txt"));
 
 		ArrayList<BandStructure> list = new ArrayList<>();
-		List<BandStructure> bands = (List<BandStructure>) req.getSession().getAttribute("bands");
+		List<BandStructure> bands = Util.loadBends(req);
 
 		if (Files.exists(path)) {
-			for (String string : Files.readAllLines(path)) {
-				String[] array = string.split("\t");
-				int id = Integer.parseInt(array[0]);
-				bands.get(id - 1).setVote(Integer.parseInt(array[1]));
-				list.add(bands.get(id - 1));
+			for (Map.Entry<Integer, Integer> map : Util.getResults(req).entrySet()) {
+				bands.get(map.getKey() - 1).setVote(map.getValue());
+				list.add(bands.get(map.getKey() - 1));
 			}
 		} else {
 			Files.createFile(path);
@@ -55,11 +55,12 @@ public class GlasanjeRezultatiServlet extends HttpServlet {
 				band.setVote(0);
 				list.add(band);
 			}
+
+			String results = Util.resultToString(list);
+			Files.write(path, results.getBytes());
 		}
 
-		List<BandStructure> best = new ArrayList<>();
-
-		getResults(best, list, req);
+		getResults(list, req);
 
 		req.getSession().setAttribute("allItems", list);
 
@@ -76,13 +77,14 @@ public class GlasanjeRezultatiServlet extends HttpServlet {
 	 * @param req
 	 *            - request
 	 */
-	private void getResults(List<BandStructure> best, List<BandStructure> list, HttpServletRequest req) {
+	private void getResults(List<BandStructure> list, HttpServletRequest req) {
 		int max = 0;
 
 		for (BandStructure band : list) {
 			max = Math.max(max, band.getVote());
 		}
 
+		List<BandStructure> best = new ArrayList<>();
 		final int max2 = max;
 		best = list.stream().filter(e -> e.getVote() == max2).collect(Collectors.toList());
 		req.getSession().setAttribute("best", best);

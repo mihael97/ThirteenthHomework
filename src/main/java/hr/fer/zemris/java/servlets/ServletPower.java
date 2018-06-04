@@ -42,7 +42,9 @@ public class ServletPower extends HttpServlet {
 	@Override
 	protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		resp.setContentType("application/vnd.ms-excel; charset=utf-8");
+		resp.setHeader("Content-Disposition", "attachment; filename=\"powers.xls\"");
 		resp.setStatus(HttpServletResponse.SC_OK);
+
 		int a = 0;
 		HSSFWorkbook workbook = null;
 		try {
