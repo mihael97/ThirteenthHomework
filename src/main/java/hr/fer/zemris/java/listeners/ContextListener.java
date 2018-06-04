@@ -9,6 +9,7 @@ public class ContextListener implements ServletContextListener {
 	@Override
 	public void contextInitialized(ServletContextEvent servletContextEvent) {
 		servletContextEvent.getServletContext().setAttribute("time", System.currentTimeMillis());
+		System.out.println("AA");
 	}
 
 	@Override
