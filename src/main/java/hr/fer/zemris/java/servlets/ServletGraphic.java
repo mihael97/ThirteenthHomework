@@ -10,11 +10,21 @@ import javax.servlet.http.HttpServletResponse;
 
 import hr.fer.zemris.java.strcutures.BandStructure;
 
-
+/**
+ * CLass prepares parameters for image rendering
+ * 
+ * @author Mihael
+ *
+ */
 public class ServletGraphic extends HttpServlet {
 	/**
-	 * Method puts all names with votes in valid form and then redirect
-	 * informations to graph generator
+	 * serialVersionUID
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
+	 * Method puts all names with votes in valid form and then redirect informations
+	 * to graph generator
 	 * 
 	 * @param req
 	 *            - request
